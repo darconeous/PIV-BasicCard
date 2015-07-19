@@ -1,0 +1,46 @@
+Rem ********************************************************************
+Rem *   PIV Constants                                                  *
+Rem ********************************************************************
+
+
+#IfNotDef ConstantsIncluded ' Prevent multiple inclusion
+Const ConstantsIncluded = True
+
+Rem  Crypto and Reset/Retry Constants   ********************************
+
+Const   MAXRETRIES = 10                         '  Max retry attempts for PIN
+Const   MAXRESETS = 255                         '  Max reset attempts for PIN
+Const   SYMMETRICBLOCKSIZE = 8                  '  Block size for 3DES
+Const   SYMMETRICKEYLENGTH = 24                 '  3DES ECB for Card Application Administration key set
+Const   SIGNATURELENGTH = 128                   '  Length of asymmetric signature
+Const   EBITS = 24                              '  Length of RSA public exponent
+Const   NBITS = 1024                            '  Length of RSA public key modulus
+
+Eeprom AID$ As String*9 = &HA0, &H00, &H00, &H03, &H08, &H00, &H00, &H10, &H00
+
+Rem  PIV Data Object Tags   ********************************************
+
+Const   CCC = &H07
+Const   CHUID = &H02
+Const   AUTHKEY = &H05
+Const   FINGER1 = &H03
+Rem  Const   FINGER2 = &H04                     '  Removed per SP800-73-1
+
+#IfDef INCOPTDATA
+Const   PRINTEDINFO = &H09
+Const   FACIALINFO = &H08
+Const   DIGITALSIG = &H0A
+Const   KEYMGNT = &H0B
+Const   CARDAUTH = &H01
+#EndIf
+
+Const   SECURITYOBJ = &H06
+Const   CSN = &H00                              '  Card Serial Number file tag
+
+Rem  Defaults   ********************************************************
+
+Const   DEFAULTCARDHOLDERPIN = "1234" + Chr$(255, 255, 255, 255)   '  Default cardholder PIN  >> old PIN: DEFAULTCARDHOLDERPIN = "11111111"               '  Default cardholder PIN
+Const   DEFAULTPUK = "11111111"                         '  Default PIN Unlock Key for PivResetRetryCounter
+Const   DEFAULTADMINKEY = "0123456789:;<=>?@ABCDEFG"    '  Default Administrator key
+
+#EndIf

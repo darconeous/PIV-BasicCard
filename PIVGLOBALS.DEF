@@ -1,0 +1,47 @@
+Rem ********************************************************************
+Rem *   PIV Global Variable Declarations                               *
+Rem ********************************************************************
+
+
+#IfNotDef GlobalsIncluded ' Prevent multiple inclusion
+Const GlobalsIncluded = True
+
+Eeprom SecurityStatus As SecurityStatusType
+
+SecurityStatus.CardholderPinVerified = False
+SecurityStatus.AdminKeyVerified = False
+SecurityStatus.ChallengeFlag = False
+#IfNotDef   PINCHECK                        '  If not compiled with PINCHECK
+SecurityStatus.EnablePinCheck = True        '  option, enable PIN checking.
+#EndIf                                      '  Otherwise, allow card admin to
+                                            '  enable/disable PIN checking.
+
+Eeprom CardholderPin As PinType
+
+CardholderPin.Value = DEFAULTCARDHOLDERPIN
+CardholderPin.RetryCounter@ = MAXRETRIES
+CardholderPin.ResetCounter@ = MAXRESETS
+
+Eeprom PrivateKey As RsaPrivateKey1024Type
+Eeprom PublicKey As RsaPublicKeyAndExponentType
+
+Public fNum% As Integer
+Public fPosition& As Long = 0
+Public CurrentChallenge$ As String*SYMMETRICBLOCKSIZE
+Public ResponseBuffer$
+Public ChainBuffer$
+Public ContactMode = True
+
+#IfDef  KEYFILES     ' Load on-card key files into memory
+
+    fNum% = Open "PublicKey.bin" For Input
+
+    Input #fNum%, PublicKey
+
+    fNum% = Open "PrivateKey.bin" For Input
+
+    Input #fNum%, PrivateKey
+
+#EndIf
+
+#EndIf

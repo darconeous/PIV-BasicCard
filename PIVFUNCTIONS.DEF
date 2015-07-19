@@ -1,0 +1,16 @@
+Rem ********************************************************************
+Rem *   PIV Function Declarations                                      *
+Rem ********************************************************************
+
+
+#IfNotDef FunctionsIncluded ' Prevent multiple inclusion
+Const FunctionsIncluded = True
+
+Declare Function SignChallenge$(Challenge$) As String
+Declare Function GenerateChallenge$() As String
+Declare Function VerifyResponse(Response$) As Integer
+Declare Function CheckFileError()
+
+Declare Function PrintBinaryStringToFile$ (BinaryString$) As String
+
+#EndIf

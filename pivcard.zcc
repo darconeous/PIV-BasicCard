@@ -1,0 +1,53 @@
+[Main Window]
+Left=525
+Top=119
+Width=405
+Height=438
+State=2
+Visible=true
+StayOnTop=false
+
+[Watches Window]
+Left=330
+Top=230
+Width=400
+Height=150
+State=0
+Visible=false
+StayOnTop=false
+
+[Call Stack Window]
+Left=430
+Top=329
+Width=357
+Height=228
+State=0
+Visible=false
+StayOnTop=false
+
+[I/O Window]
+Left=300
+Top=200
+Width=400
+Height=150
+State=0
+Visible=false
+StayOnTop=false
+
+[Files Window]
+Left=255
+Top=482
+Width=515
+Height=231
+State=0
+Visible=false
+StayOnTop=false
+
+[Compiler]
+SourceFile=PivCard.BAS
+IncludePath=c:\BasicCardPro\inc;c:\BasicCardPro\lib;c:\BasicCardPro\pro;c:\BasicCardPro\tools;c:\BasicCardPro\lib\curves;E:\Dev\BasicCard
+ImageFile=true
+StackSize=80
+
+[BasicCard]
+ConfigFile=c:\BasicCardPro\Pro\ZC45D_F.zcf

@@ -1,0 +1,44 @@
+Rem ********************************************************************
+Rem *   PIV Type Definitions                                           *
+Rem ********************************************************************
+
+Rem NBITS = 1024
+Rem EBITS = 24
+
+#IfNotDef TypesIncluded ' Prevent multiple inclusion
+Const TypesIncluded = True
+
+Type    RsaPrivateKey1024Type
+    Cmid@ As Byte			' 1 byte
+    KeyRef@ As Byte			' 1 byte
+    p$ As String*(NBITS / 16)		' 64 bytes
+    q$ As String*(NBITS / 16)		' 64 bytes
+    e$ As String*(EBITS / 8)		' 3 bytes
+End Type
+
+Type    RsaPublicKeyAndExponentType
+    n$ As String*(NBITS / 8)		' 128 bytes
+    e$ As String*(EBITS / 8)		' 3 bytes
+End Type
+
+Type    SymmetricKeyType
+    Cmid@ As Byte
+    KeyRef@ As Byte
+    Value As String*SYMMETRICKEYLENGTH
+End Type
+
+Type    PinType
+    Value As String*8
+    KeyRef@ As Byte
+    RetryCounter@ As Byte
+    ResetCounter@ As Byte
+End Type
+
+Type SecurityStatusType
+    CardholderPinVerified As Integer
+    AdminKeyVerified As Integer
+    ChallengeFlag As Integer
+    EnablePinCheck As Integer
+End Type
+
+#EndIf

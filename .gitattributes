@@ -1,0 +1,4 @@
+*.BAS text eol=crlf
+*.DEF text eol=crlf
+*.zcc text eol=crlf
+

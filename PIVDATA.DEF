@@ -1,0 +1,89 @@
+Rem ********************************************************************
+Rem *   PIV Data Model Definition                                      *
+Rem *                                                                  *
+Rem *   Requires input files in .\SampleData                           *
+Rem *                                                                  *
+Rem ********************************************************************
+
+
+#IfNotDef DataModelIncluded ' Prevent multiple inclusion
+Const DataModelIncluded = True
+
+Dir "\"
+    Write Unlock
+
+    File "CCC"
+        Write Unlock
+        Input "SampleData\ccc"
+
+    File "CHUID"
+        Write Unlock
+        Input "SampleData\signed chuid"
+
+    File "PivAuthKey"
+        Write Unlock
+        Input "SampleData\authcert"
+
+    File "Fingerprint1"
+        Write Unlock
+        Input "SampleData\signed finger1"
+
+Rem Second biometric object removed per SP800-73-1
+
+Rem    File "Fingerprint2"
+Rem        Write Unlock
+Rem        Input "SampleData\signed finger2"
+
+#IfDef INCOPTDATA 
+    File "PrintedInfo"
+        Write Unlock
+        Input "SampleData\printed"
+
+    File "FacialInfo"
+Rem        Write Unlock
+Rem        Input "SampleData\signed face"     ' disabled since supplied facial
+                                              ' image data is too large to fit
+                                              ' on the card
+
+    File "DigitalSig"
+        Write Unlock
+        Input "SampleData\sigcert"
+
+    File "KeyMgnt"
+        Write Unlock
+        Input "SampleData\keycert"
+
+    File "CardAuth"
+        Write Unlock
+        Input "SampleData\cardcert"
+#EndIf
+
+    File "SecurityObject"
+        Write Unlock
+        Input "SampleData\Signed Security Object.der"
+
+#IfDef  KEYFILES
+
+Rem This optional section downloads the public and private components
+Rem of the PIV Authentication Key from files on the host system for
+Rem testing purposes.  The files must be created with the BasicCard
+Rem WRITE statement using the PIV public and private key type
+Rem definitions provided in PIVTYPES.DEF to insure that they are
+Rem correctly formatted.
+Rem
+Rem Operational PIV systems will typically generate keypairs on the card
+Rem and never export the private key for security reasons.
+
+    File "PublicKey.bin"
+        Write Unlock
+        Input "KeyFiles\PublicKey.bin"
+
+    File "PrivateKey.bin"
+        Write Unlock
+        Input "KeyFiles\PrivateKey.bin"
+
+#EndIf
+
+End Dir
+
+#EndIf

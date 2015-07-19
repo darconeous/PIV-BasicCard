@@ -1,0 +1,40 @@
+Rem ********************************************************************
+Rem *   PIV Card Application Property Template                         *
+Rem ********************************************************************
+
+
+Const APTTEMPLATE           =&H61
+Const APTAID                =&H4F
+Const APTTAGAUTHORITY       =&H79
+Const APTAPPLICATIONLABEL   =&H50
+Const APTURL1               =&H5F
+Const APTURL2               =&H50
+Const APTTAGAID             =&H4F
+
+Const APT01                 ="PIV Card Application"     '20 bytes
+
+Const APT02                 ="csrc.nist.gov/publications/nistpubs/800-73/SP800-73-Final.pdf"    '61 bytes
+
+
+rem Eeprom  APT10 As String*46 = APTTEMPLATE, &H6d, APTAID,_ 'klm removed &H50 in APT13.
+Eeprom  APT10 As String*46 = APTTEMPLATE, &H6C, APTAID,_
+        &H0B, &HA0, &H00, &H00, &H03, &H08, &H00, &H00, &H10, &H00, &H01, &H00,_
+        APTTAGAUTHORITY, &H07, APTTAGAID,_
+        &H05, &HA0, &H00, &H00, &H03, &H08,_
+        APTAPPLICATIONLABEL, &H14, APT01
+
+rem Eeprom  APT13 As String*63 = &H50, &H3D, APT02 ' klm 12/7/06
+Eeprom  APT13 As String*62 = &H3D, APT02 ' klm 12/7/06...removed &H50 in the front
+
+Eeprom  ApplicationPropertiesTemplate$ As String*110 ' klm 12/7/06 changed from 111 to 110
+
+ApplicationPropertiesTemplate$ = APT10 + Chr$(APTURL1) + Chr$(APTURL2) + APT13
+
+
+Rem Eeprom  APPPROPERTYTEMPLATE As String*110 = APTTEMPLATE, &H6C, APTAID,_
+Rem            &H0B, &HA0, &H00, &H00, &H03, &H08, &H00, &H00, &H10, &H00,_
+Rem            &H01, &H00,_
+Rem            APTTAGAUTHORITY, &H07, APTTAGAID,_
+Rem            &H05, &HA0, &H00, &H00, &H03, &H08,_
+Rem            APTAPPLICATIONLABEL, &H14, APT03, APTURL1, APTURL2, &H50,_
+Rem            &H3D, APT04
